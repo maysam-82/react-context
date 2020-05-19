@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import LanguageContext from '../context/LanguageContext';
+import ColorContext from '../context/ColorContext';
 
 export default class Button extends Component {
 	renderButtonTitle = (value) => {
@@ -11,13 +12,19 @@ export default class Button extends Component {
 		}
 
 		return (
-			<button className="ui button primary">
-				<LanguageContext.Consumer>
-					{/* the child of Consumer should be a function that get value inside pipe (context object)  */}
-					{/* We use Consumer when we are going to use multiple contexts */}
-					{(value) => (value === 'english' ? 'Submit' : 'ارسال')}
-				</LanguageContext.Consumer>
-			</button>
+			<ColorContext.Consumer>
+				{(color) => {
+					return (
+						<button className={`ui button ${color}`}>
+							<LanguageContext.Consumer>
+								{/* the child of Consumer should be a function that get value inside pipe (context object)  */}
+								{/* We use Consumer when we are going to use multiple contexts */}
+								{(value) => (value === 'english' ? 'Submit' : 'ارسال')}
+							</LanguageContext.Consumer>
+						</button>
+					);
+				}}
+			</ColorContext.Consumer>
 		);
 	}
 }
