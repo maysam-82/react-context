@@ -2,13 +2,22 @@ import React, { Component } from 'react';
 import LanguageContext from '../context/LanguageContext';
 
 export default class Button extends Component {
-	// contextType is going to link Button to context object. We connected a context object to Button component. `contextType` must not be renamed.
-	// `static` adds a property directly to a class and it is equivalent to `Botton.contextType = LanguageContext` after creating a class.
-	static contextType = LanguageContext;
-
-	// After creating contextType, we can reference this.context and access data inside context object.
+	renderButtonTitle = (value) => {
+		return value === 'english' ? 'Submit' : 'ارسال';
+	};
 	render() {
-		const buttonTitle = this.context === 'english' ? 'Submit' : 'ارسال';
-		return <button className="ui button primary">{buttonTitle}</button>;
+		{
+			/* Consumer property is a react component that is used to get info from context object */
+		}
+
+		return (
+			<button className="ui button primary">
+				<LanguageContext.Consumer>
+					{/* the child of Consumer should be a function that get value inside pipe (context object)  */}
+					{/* We use Consumer when we are going to use multiple contexts */}
+					{(value) => (value === 'english' ? 'Submit' : 'ارسال')}
+				</LanguageContext.Consumer>
+			</button>
+		);
 	}
 }
