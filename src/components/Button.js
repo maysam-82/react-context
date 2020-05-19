@@ -7,11 +7,8 @@ export default class Button extends Component {
 		return value === 'english' ? 'Submit' : 'ارسال';
 	};
 	render() {
-		{
-			/* Consumer property is a react component that is used to get info from context object */
-		}
-
 		return (
+			//   Consumer property is a react component that is used to get info from context object
 			<ColorContext.Consumer>
 				{(color) => {
 					return (
